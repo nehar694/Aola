@@ -50,53 +50,66 @@ section {
 /* Chatbot section */
 #chatbot {
     margin-top: 30px;
+    padding: 20px;
+    background-color: #1a1a1a; /* Dark background for the chatbot section */
+    border-radius: 8px;
+    box-shadow: 0 0 15px #00ff00; /* Green glow around the entire chatbot */
     text-align: center;
+    max-width: 600px;
+    margin: 50px auto;
 }
 
 #userInput {
-    width: 300px;
-    padding: 10px;
+    width: 80%;
+    padding: 12px;
     font-size: 1.2em;
     margin-right: 10px;
-    border: 1px solid #00ff00;
+    border: 2px solid #00ff00;
     border-radius: 4px;
     background-color: black;
     color: #00ff00;
+    transition: border-color 0.3s ease;
 }
 
-#response {
-    margin-top: 20px;
-    font-size: 1.2em;
+#userInput:focus {
+    outline: none;
+    border-color: #00cc00; /* Slightly lighter green when focused */
+    box-shadow: 0 0 10px #00cc00; /* Glowing effect when focused */
 }
 
-/* AI Voice Assistant Section */
-#voice {
-    margin-top: 50px;
-    text-align: center;
-}
-
-#speakButton {
-    padding: 10px 20px;
+button {
+    padding: 12px 20px;
     background-color: #00ff00;
     border: none;
     color: black;
     font-size: 1.2em;
     cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
-#speakButton:hover {
-    background-color: #00cc00;
+button:hover {
+    background-color: #00cc00; /* Hover effect on button */
 }
 
-/* Chart.js Section */
-#chart {
-    margin-top: 50px;
-    text-align: center;
+/* Styling for the AI responses */
+#response {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #00ff00;
+    background-color: #1a1a1a; /* Dark background for responses */
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 10px #00ff00; /* Green glow around the response */
+    white-space: pre-wrap; /* Preserve line breaks in responses */
+    text-align: left;
 }
 
-canvas {
-    border: 1px solid #00ff00;
-    background-color: black;
+#response p {
+    margin: 0;
 }
 
 /* Neural Network (Canvas) */
@@ -135,4 +148,34 @@ footer {
     overflow: hidden;
     border-right: 2px solid #00ff00; /* Green cursor effect */
     animation: typing 3s steps(40) 1s forwards;
+}
+
+/* Chart.js Section */
+#chart {
+    margin-top: 50px;
+    text-align: center;
+}
+
+canvas {
+    border: 1px solid #00ff00;
+    background-color: black;
+}
+
+/* AI Voice Assistant Section */
+#voice {
+    margin-top: 50px;
+    text-align: center;
+}
+
+#speakButton {
+    padding: 10px 20px;
+    background-color: #00ff00;
+    border: none;
+    color: black;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+#speakButton:hover {
+    background-color: #00cc00;
 }

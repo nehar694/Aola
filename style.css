@@ -1,0 +1,75 @@
+/* Resetting some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Courier New", Courier, monospace;
+    background-color: black;
+    color: #00ff00; /* Green color like the Matrix */
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px #00ff00;
+}
+
+.green {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+/* Section styles */
+section {
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #00ff00;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+/* Matrix-like text animation */
+@keyframes matrix-animation {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #00ff00;
+    margin-top: 50px;
+    font-size: 0.8em;
+}
+
+/* Animation effect for headings and paragraphs */
+h1, h2, p {
+    animation: matrix-animation 2s infinite;
+}

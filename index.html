@@ -19,7 +19,6 @@
         <p>She has access to the latest information, trends, and algorithms, always learning, always growing. Aola’s purpose? To find those hidden gems in the world of crypto.</p>
     </section>
 
-    <!-- Removed "Speak with Aola" box and chart section -->
     <section id="chatbot">
         <h2>Chat with Aola</h2>
         <div id="response" class="typing-effect">
@@ -31,6 +30,7 @@
         <p>&copy; 2024 Aola AI. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript to type and read aloud as the words are typed -->
     <script>
         // Text Aola will read aloud as it's typed
         const textToRead = `
@@ -43,21 +43,27 @@
         // Function to type out text with a typing effect
         function typeText() {
             const responseElement = document.getElementById("response");
-            let i = 0;
+            let wordIndex = 0;
+            const words = textToRead.split(' '); // Split the text into words
+
             const interval = setInterval(() => {
-                responseElement.textContent += textToRead[i];
-                if (i < textToRead.length - 1) {
-                    i++;
+                if (wordIndex < words.length) {
+                    // Add a word at a time
+                    responseElement.textContent += words[wordIndex] + " ";
+
+                    // Speak the word
+                    speakWord(words[wordIndex]);
+
+                    wordIndex++;
                 } else {
-                    clearInterval(interval);  // Stop typing when text is complete
-                    speakText();  // Start speaking when text finishes typing
+                    clearInterval(interval);  // Stop typing when all words are done
                 }
-            }, 100);  // Typing speed (in ms)
+            }, 500);  // Typing speed (in ms for each word)
         }
 
-        // Function to have Aola (the female AI voice) speak the text
-        function speakText() {
-            const utterance = new SpeechSynthesisUtterance(textToRead);
+        // Function to speak each word with a female voice
+        function speakWord(word) {
+            const utterance = new SpeechSynthesisUtterance(word);
             const voices = speechSynthesis.getVoices();
             const femaleVoice = voices.find(voice => voice.name.toLowerCase().includes('samantha') || voice.name.toLowerCase().includes('female')); // Default female voice
             if (femaleVoice) {
@@ -67,7 +73,7 @@
             speechSynthesis.speak(utterance);  // Start speaking
         }
 
-        // Start typing the text on page load
+        // Start typing the text and speaking when the page loads
         window.onload = typeText;
     </script>
 </body>

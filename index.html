@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aola - The AI</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Include Chart.js for Data Visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -21,150 +19,56 @@
         <p>She has access to the latest information, trends, and algorithms, always learning, always growing. Aola’s purpose? To find those hidden gems in the world of crypto.</p>
     </section>
 
-    <!-- AI Chatbot Section -->
+    <!-- Removed "Speak with Aola" box and chart section -->
     <section id="chatbot">
         <h2>Chat with Aola</h2>
-        <input type="text" id="userInput" placeholder="Ask Aola something..." />
-        <button onclick="generateResponse()">Ask</button>
-        <div id="response"></div>
+        <div id="response" class="typing-effect">
+            <!-- Text will be typed out here -->
+        </div>
     </section>
-
-    <!-- AI Data Visualization (Chart.js) -->
-    <section id="chart">
-        <h2>AI Trends Visualization</h2>
-        <canvas id="myChart" width="400" height="200"></canvas>
-    </section>
-
-    <!-- AI Voice Assistant (Text-to-Speech) -->
-    <section id="voice">
-        <h2>Speak with Aola</h2>
-        <button id="speakButton">Speak</button>
-    </section>
-
-    <!-- Neural Network Background (Canvas) -->
-    <canvas id="neuralNetwork"></canvas>
 
     <footer>
         <p>&copy; 2024 Aola AI. All rights reserved.</p>
     </footer>
 
     <script>
-        // Chatbot Response Logic
-        function generateResponse() {
-            const userInput = document.getElementById("userInput").value;
-            const responseDiv = document.getElementById("response");
-            
-            // Simulate AI Response with simple logic
-            let response = '';
-            if (userInput.toLowerCase().includes("next 1000x")) {
-                response = "Aola: Searching... Could be a hidden gem on pump.fun!";
-            } else if (userInput.toLowerCase().includes("ai")) {
-                response = "Aola: I am the AI that finds opportunities!";
-            } else {
-                response = "Aola: Sorry, I didn't quite catch that. Ask me about trends.";
-            }
-            
-            responseDiv.innerHTML = `<p>${response}</p>`;
-            document.getElementById("userInput").value = '';  // Clear input after response
-        }
+        // Text Aola will read aloud as it's typed
+        const textToRead = `
+            Aola is a cutting-edge artificial intelligence, constantly evolving and analyzing trends. 
+            She sits in the depths of pump.fun, scanning for the next big project, the next 1000x.
+            She has access to the latest information, trends, and algorithms, always learning, always growing.
+            Aola’s purpose? To find those hidden gems in the world of crypto.
+        `;
 
-        // Chart.js Data Visualization
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                datasets: [{
-                    label: 'AI Predictions',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderColor: 'rgba(0, 255, 0, 1)',
-                    backgroundColor: 'rgba(0, 255, 0, 0.2)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+        // Function to type out text with a typing effect
+        function typeText() {
+            const responseElement = document.getElementById("response");
+            let i = 0;
+            const interval = setInterval(() => {
+                responseElement.textContent += textToRead[i];
+                if (i < textToRead.length - 1) {
+                    i++;
+                } else {
+                    clearInterval(interval);  // Stop typing when text is complete
+                    speakText();  // Start speaking when text finishes typing
                 }
+            }, 100);  // Typing speed (in ms)
+        }
+
+        // Function to have Aola (the female AI voice) speak the text
+        function speakText() {
+            const utterance = new SpeechSynthesisUtterance(textToRead);
+            const voices = speechSynthesis.getVoices();
+            const femaleVoice = voices.find(voice => voice.name.toLowerCase().includes('samantha') || voice.name.toLowerCase().includes('female')); // Default female voice
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;  // Set the voice to Aola's voice (female)
             }
-        });
-
-        // AI Voice Assistant (Text-to-Speech)
-        function speak(text) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.pitch = 1;
-            utterance.rate = 1;
-            window.speechSynthesis.speak(utterance);
+            utterance.rate = 1;  // Speed of the speech
+            speechSynthesis.speak(utterance);  // Start speaking
         }
 
-        document.getElementById("speakButton").addEventListener("click", function() {
-            speak("Hello, I am Aola, your AI assistant.");
-        });
-
-        // Neural Network Animation (Canvas)
-        const canvas = document.getElementById('neuralNetwork');
-        const ctxCanvas = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particles = [];
-
-        function Particle(x, y) {
-            this.x = x;
-            this.y = y;
-            this.size = Math.random() * 3 + 1;
-            this.speedX = Math.random() * 3 - 1.5;
-            this.speedY = Math.random() * 3 - 1.5;
-        }
-
-        Particle.prototype.update = function() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.size > 0.2) this.size -= 0.1;
-        };
-
-        Particle.prototype.draw = function() {
-            ctxCanvas.fillStyle = 'rgba(0, 255, 0, 0.8)';
-            ctxCanvas.strokeStyle = 'rgba(0, 255, 0, 0.8)';
-            ctxCanvas.lineWidth = 1;
-            ctxCanvas.beginPath();
-            ctxCanvas.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctxCanvas.fill();
-        };
-
-        function animate() {
-            ctxCanvas.clearRect(0, 0, canvas.width, canvas.height);
-            particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
-            
-            particles.forEach((particle, index) => {
-                particle.update();
-                particle.draw();
-                if (particle.size <= 0.2) {
-                    particles.splice(index, 1);
-                }
-            });
-
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 100) {
-                        ctxCanvas.beginPath();
-                        ctxCanvas.moveTo(particles[i].x, particles[i].y);
-                        ctxCanvas.lineTo(particles[j].x, particles[j].y);
-                        ctxCanvas.stroke();
-                    }
-                }
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
+        // Start typing the text on page load
+        window.onload = typeText;
     </script>
 </body>
 </html>

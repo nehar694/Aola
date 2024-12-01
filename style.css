@@ -24,13 +24,13 @@ header {
 h1 {
     font-size: 3em;
     margin-bottom: 10px;
-    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; /* More glow for the header */
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; /* Glowing green text */
 }
 
 h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
-    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; /* Subtle glow */
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; /* Subtle green glow for subheaders */
 }
 
 .green {
@@ -44,10 +44,10 @@ section {
     margin-bottom: 30px;
     border: 1px solid #00ff00;
     border-radius: 8px;
-    box-shadow: 0 0 5px #00ff00; /* Subtle glow */
+    box-shadow: 0 0 5px #00ff00; /* Subtle glow around sections */
 }
 
-/* Chatbot section */
+/* Chatbot section styles */
 #chatbot {
     margin-top: 30px;
     padding: 20px;
@@ -59,40 +59,7 @@ section {
     margin: 50px auto;
 }
 
-#userInput {
-    width: 80%;
-    padding: 12px;
-    font-size: 1.2em;
-    margin-right: 10px;
-    border: 2px solid #00ff00;
-    border-radius: 4px;
-    background-color: black;
-    color: #00ff00;
-    transition: border-color 0.3s ease;
-}
-
-#userInput:focus {
-    outline: none;
-    border-color: #00cc00; /* Slightly lighter green when focused */
-    box-shadow: 0 0 10px #00cc00; /* Glowing effect when focused */
-}
-
-button {
-    padding: 12px 20px;
-    background-color: #00ff00;
-    border: none;
-    color: black;
-    font-size: 1.2em;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #00cc00; /* Hover effect on button */
-}
-
-/* Styling for the AI responses */
+/* Typing effect */
 #response {
     margin-top: 20px;
     font-size: 1.2em;
@@ -106,30 +73,6 @@ button:hover {
     box-shadow: 0 0 10px #00ff00; /* Green glow around the response */
     white-space: pre-wrap; /* Preserve line breaks in responses */
     text-align: left;
-}
-
-#response p {
-    margin: 0;
-}
-
-/* Neural Network (Canvas) */
-#neuralNetwork {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    z-index: -1;  /* Set canvas behind the content */
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 10px;
-    border-top: 1px solid #00ff00;
-    margin-top: 50px;
-    font-size: 0.8em;
 }
 
 /* Animations for typing effect */
@@ -150,32 +93,11 @@ footer {
     animation: typing 3s steps(40) 1s forwards;
 }
 
-/* Chart.js Section */
-#chart {
-    margin-top: 50px;
+/* Footer styles */
+footer {
     text-align: center;
-}
-
-canvas {
-    border: 1px solid #00ff00;
-    background-color: black;
-}
-
-/* AI Voice Assistant Section */
-#voice {
+    padding: 10px;
+    border-top: 1px solid #00ff00;
     margin-top: 50px;
-    text-align: center;
-}
-
-#speakButton {
-    padding: 10px 20px;
-    background-color: #00ff00;
-    border: none;
-    color: black;
-    font-size: 1.2em;
-    cursor: pointer;
-}
-
-#speakButton:hover {
-    background-color: #00cc00;
+    font-size: 0.8em;
 }

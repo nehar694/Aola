@@ -19,20 +19,17 @@ header {
     margin-bottom: 50px;
 }
 
+/* Typing effect styles */
 h1, h2, p {
-    display: inline-block; /* Ensures text is displayed inline */
-    white-space: nowrap;   /* Prevents text from wrapping */
-    overflow: hidden;      /* Ensures that text does not overflow before animation */
-    border-right: 3px solid #00ff00;  /* Simulates the cursor effect */
-    padding-right: 5px;    /* Adds a small space to the right */
-}
-
-/* Typing animation effect */
-h1, h2, p {
+    display: inline-block; /* Makes text appear inline */
+    white-space: nowrap;   /* Prevents wrapping */
+    overflow: hidden;      /* Hides text before it's revealed */
+    border-right: 3px solid #00ff00;  /* Simulates the blinking cursor */
+    padding-right: 5px;    /* Adds space for the cursor effect */
     animation: typing 4s steps(40) 1s forwards, blink-caret 0.75s step-end infinite;
 }
 
-/* Animation to simulate typing */
+/* Typing animation */
 @keyframes typing {
     from {
         width: 0;
@@ -76,7 +73,7 @@ section {
     box-shadow: 0 0 5px #00ff00; /* Reduced glow */
 }
 
-/* Removed the matrix animation since the "breathing" effect is not needed */
+/* Footer styles */
 footer {
     text-align: center;
     padding: 10px;

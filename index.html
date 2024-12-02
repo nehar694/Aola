@@ -1,37 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aola - AI Nurse in the Trenches</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat with Aola - Pump.Fun Meme Coin</title>
+  
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <!-- Title and centered image -->
-            <h1>Aola - Your AI Nurse</h1>
-            <img src="https://i.ibb.co/hFNvNmM/Aola.png" alt="Aola - AI Nurse" class="profile-pic">
-        </div>
-    </header>
+  <!-- Main chat container -->
+  <div class="chat-container">
+    <!-- Aola's image at the top -->
+    <img src="https://i.ibb.co/hFNvNmM/Aola.png" alt="Aola" class="aola-image">
 
-    <main>
-        <section id="chat-container">
-            <h2>Chat with the Trenches Crew</h2>
-            <div id="chat-box">
-                <div id="messages">
-                    <div class="message">Welcome to the trenches! Chat with others here.</div>
-                </div>
-                <input type="text" id="chat-input" placeholder="Type a message..." onkeyup="handleTyping(event)">
-                <button id="send-btn" onclick="sendMessage()">Send</button>
-            </div>
-        </section>
-    </main>
+    <!-- Chatbox to display messages -->
+    <div id="chatbox"></div>
 
-    <footer>
-        <p>Powered by Aola AI Nurse</p>
-    </footer>
+    <!-- Input field and button for user message -->
+    <input type="text" id="userMessage" placeholder="Type your message here..." />
+    <button id="sendButton">Send</button>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- Link to external JavaScript file -->
+  <script src="script.js"></script>
 </body>
 </html>

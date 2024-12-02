@@ -40,6 +40,21 @@
             Aola’s purpose? To find those hidden gems in the world of crypto.
         `;
 
+        let femaleVoice = null; // Variable to store the female voice
+
+        // Function to ensure the female voice is loaded
+        function loadVoices() {
+            const voices = speechSynthesis.getVoices();
+            femaleVoice = voices.find(voice => voice.name.toLowerCase().includes('samantha') || voice.name.toLowerCase().includes('female'));
+            if (!femaleVoice) {
+                // If female voice is not found, select the first available female voice
+                femaleVoice = voices.find(voice => voice.name.toLowerCase().includes('female'));
+            }
+        }
+
+        // Listen for voices to be loaded
+        speechSynthesis.onvoiceschanged = loadVoices;
+
         // Function to type out text with a typing effect
         function typeText() {
             const responseElement = document.getElementById("response");
@@ -63,18 +78,20 @@
 
         // Function to speak each word with a female voice
         function speakWord(word) {
-            const utterance = new SpeechSynthesisUtterance(word);
-            const voices = speechSynthesis.getVoices();
-            const femaleVoice = voices.find(voice => voice.name.toLowerCase().includes('samantha') || voice.name.toLowerCase().includes('female')); // Default female voice
             if (femaleVoice) {
+                const utterance = new SpeechSynthesisUtterance(word);
                 utterance.voice = femaleVoice;  // Set the voice to Aola's voice (female)
+                utterance.rate = 1;  // Speed of the speech
+                speechSynthesis.speak(utterance);  // Start speaking
             }
-            utterance.rate = 1;  // Speed of the speech
-            speechSynthesis.speak(utterance);  // Start speaking
         }
 
         // Start typing the text and speaking when the page loads
-        window.onload = typeText;
+        window.onload = () => {
+            loadVoices();  // Load the voices
+            typeText();  // Start typing text and speaking
+        };
     </script>
 </body>
 </html>
+

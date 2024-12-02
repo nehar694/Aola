@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCII Art Animation</title>
-    <link rel="stylesheet" href="style.css">
+    <title>ASCII Art Pop-up</title>
     <style>
         body {
             margin: 0;
@@ -23,76 +22,31 @@
             white-space: pre;
             font-size: 16px;
             line-height: 1.2;
-            text-align: center;  /* Center the ASCII art horizontally */
-        }
-
-        .ascii-line {
-            opacity: 0;
-            transform: translateY(-50px); /* Start slightly above */
-            animation: fall 1s forwards;
-            display: inline-block;  /* Ensure the characters align inline */
-        }
-
-        .ascii-character {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(-50px); /* Start slightly above */
-            animation: fall-character 1s forwards;
-        }
-
-        @keyframes fall {
-            to {
-                opacity: 1;
-                transform: translateY(0); /* Move into position */
-            }
-        }
-
-        @keyframes fall-character {
-            to {
-                opacity: 1;
-                transform: translateY(0); /* Move into place */
-            }
+            text-align: center;
+            opacity: 0;  /* Initially hidden */
+            transition: opacity 2s ease-in-out;  /* Fade-in effect */
+            max-width: 80%;  /* Optional: Limit the width */
+            word-wrap: break-word;  /* Ensure long lines break correctly */
         }
     </style>
 </head>
 <body>
+    <div id="ascii-container"></div>
 
-<div id="ascii-container"></div>
+    <script>
+        // Fetch the ASCII art from the GitHub file
+        fetch("https://raw.githubusercontent.com/nehar694/Aola/refs/heads/main/asciiArt.txt")
+            .then(response => response.text())
+            .then(asciiArt => {
+                const asciiContainer = document.getElementById('ascii-container');
+                asciiContainer.textContent = asciiArt;
 
-<script>
-// Fetch the ASCII art from the external file on GitHub
-fetch('https://raw.githubusercontent.com/nehar694/Aola/refs/heads/main/asciiArt.txt')
-    .then(response => response.text())
-    .then(data => {
-        const asciiArt = data.split('\n'); // Split the ASCII art into lines
-
-        const container = document.getElementById('ascii-container');
-        
-        asciiArt.forEach((line, index) => {
-            // Create a div for each line of the ASCII art
-            const lineDiv = document.createElement('div');
-            lineDiv.classList.add('ascii-line');
-            container.appendChild(lineDiv);
-            
-            // Split the line into individual characters
-            const characters = line.split('');
-            
-            // Add each character to the lineDiv
-            characters.forEach((char, charIndex) => {
-                const charDiv = document.createElement('span');
-                charDiv.classList.add('ascii-character');
-                charDiv.textContent = char;
-
-                // Append the character to the line div
-                lineDiv.appendChild(charDiv);
-
-                // Adjust the animation delay for each character (to stagger their fall)
-                charDiv.style.animationDelay = `${(index + charIndex * 0.1)}s`; // Delay based on line and character position
-            });
-        });
-    })
-    .catch(error => console.error('Error loading ASCII art:', error));
-</script>
-
+                // Trigger the fade-in effect by changing the opacity
+                setTimeout(() => {
+                    asciiContainer.style.opacity = 1;
+                }, 100);  // Start the fade-in after a slight delay
+            })
+            .catch(err => console.error('Error loading ASCII art:', err));
+    </script>
 </body>
 </html>

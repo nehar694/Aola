@@ -26,6 +26,7 @@
       align-items: center;
       height: 100vh; /* Full height */
       margin: 0;
+      overflow: hidden;
     }
 
     /* Matrix Background Animation */
@@ -45,10 +46,34 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 255, 255, 0.1);
-      background-image: linear-gradient(45deg, rgba(0, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 255, 255, 0.1) 75%, transparent 75%, transparent);
-      background-size: 50px 50px;
-      animation: matrix 5s linear infinite;
+      background-color: black;
+      color: #00FF00;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 24px;
+      line-height: 30px;
+      white-space: nowrap;
+      animation: matrix 10s linear infinite;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .matrix-background span {
+      display: inline-block;
+      opacity: 0;
+      animation: drop 1s linear infinite;
+    }
+
+    @keyframes drop {
+      0% {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(100%);
+      }
     }
 
     /* Chatbox container */
@@ -98,7 +123,7 @@
     }
 
     .aola-message {
-      background-color: #FF5722;
+      background-color: #00B5E2; /* Cyan for Aola's messages */
       color: white;
       text-align: right;
     }
@@ -146,7 +171,11 @@
 
 <body>
   <!-- Matrix Background -->
-  <div class="matrix-background"></div>
+  <div class="matrix-background">
+    <!-- Add some matrix "falling" characters -->
+    <span>Aola 💥</span><span>🚀</span><span>PUMP IT</span><span>TO THE MOON</span>
+    <span>100X</span><span>🔴</span><span>FOMO</span><span>🚀</span><span>YOLO</span>
+  </div>
 
   <!-- Main chat container -->
   <div class="chat-container">
@@ -180,8 +209,6 @@
     // Function to get a response from Aola based on the user input
     function getAolaResponse(userInput) {
       let response = '';
-
-      // Lowercase user input for consistency
       const userInputLower = userInput.toLowerCase();
 
       // Bullish response
@@ -192,9 +219,28 @@
       else if (userInputLower.includes('scam') || userInputLower.includes('dump') || userInputLower.includes('selling')) {
         response = "Oh no, not the FUD! Get ready to eat dust when we hit 1B market cap 🤑💩";
       }
-      // Neutral or random responses
+      // Price/coin-related response
+      else if (userInputLower.includes('price') || userInputLower.includes('how much') || userInputLower.includes('value')) {
+        response = "The price? We don't care about that. We're here for the memes, baby. 🚀💰";
+      }
+      // General hype response
+      else if (userInputLower.includes('hype') || userInputLower.includes('bullish')) {
+        response = "Get on board, the hype train is leaving! 🚂💨";
+      }
+      // FOMO response
+      else if (userInputLower.includes('fomo') || userInputLower.includes('missed out')) {
+        response = "Missed out? No way. You better believe we're just getting started! 🔥";
+      }
+      // Random response
       else {
-        response = "You better believe this is the meme coin of the century. Pump it, baby!";
+        const randomResponses = [
+          "Aola says: Keep calm and HODL on! ✌️",
+          "Aola's secret: We're going to the moon 🌙🚀",
+          "Just wait, the best is yet to come! 🎉",
+          "I see you, and you're ready to win! 💪🔥",
+          "Who said memes can't make you rich? 💰👀"
+        ];
+        response = randomResponses[Math.floor(Math.random() * randomResponses.length)];
       }
 
       return response;
@@ -214,23 +260,4 @@
         // Get Aola's response
         const aolaResponse = getAolaResponse(userMessage);
 
-        // Display Aola's response after a short delay
-        setTimeout(() => {
-          displayMessage(aolaResponse, 'aola');
-        }, 500);
-      }
-    }
-
-    // Event listener for the "Send" button
-    sendButton.addEventListener('click', handleUserMessage);
-
-    // Allow the user to press "Enter" to send a message
-    userMessageInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        handleUserMessage();
-      }
-    });
-  </script>
-</body>
-
-</html>
+        // Display A

@@ -3,101 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Falling ASCII Art</title>
+    <title>Falling ASCII Art AI</title>
     <style>
         body {
-            background-color: black;
-            color: white;
-            font-family: monospace;
             margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #0F0;
+            font-family: monospace;
+            overflow: hidden;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
-        .ascii-container {
-            white-space: pre;
-            position: absolute;
-            font-size: 12px;
-            line-height: 14px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-        }
-        .ascii-line {
+
+        #ascii-container {
             position: relative;
-            display: flex;
+            white-space: pre;
+            font-size: 20px;
+            line-height: 1.2;
         }
-        .ascii-char {
-            opacity: 0;
+
+        .ascii-line {
             position: absolute;
-            top: -30px; /* Starting point above the screen */
-            transition: opacity 0.5s ease-out, top 1s ease-out;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: fall 10s infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -100px;
+                opacity: 0;
+            }
+            100% {
+                top: 100vh;
+                opacity: 1;
+            }
+        }
+
+        .line {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <div class="ascii-container" id="asciiContainer">
-        <!-- The ASCII art characters will be added here -->
-    </div>
+    <div id="ascii-container"></div>
 
     <script>
-        // Define your ASCII art here as an array of strings
-        const asciiArt = [
-            "000000000                          4     9     51    1     9    000",
-            "000000000  00 7 308   20 3030 960 4     9     7  00  0   070    000",
-            "000000000  00 7 104 7 30 3010 660  5500510000  72 16 0 7 010    000",
-            "000000000  00 7 104 1 30 3030 9402 3 0008493500  80  0   010    000",
-            "000000000  00 7 305   30 3030 994       50176260000092   010    000",
-            // Add your full ASCII art here
-        ];
-
-        // Get the container where we want to display the art
-        const asciiContainer = document.getElementById('asciiContainer');
-
-        // Function to create each line of the ASCII art
-        function createAsciiLine(lineText) {
-            const lineDiv = document.createElement('div');
-            lineDiv.classList.add('ascii-line');
-            for (let i = 0; i < lineText.length; i++) {
-                const charDiv = document.createElement('div');
-                charDiv.classList.add('ascii-char');
-                charDiv.innerText = lineText[i];
-                lineDiv.appendChild(charDiv);
-            }
-            return lineDiv;
+        // Function to load ASCII art from an external file
+        async function loadAsciiArt() {
+            const response = await fetch('https://raw.githubusercontent.com/your-username/your-repository/main/asciiArt.txt');
+            const asciiText = await response.text();
+            return asciiText.split('\n');
         }
 
-        // Function to animate the falling of the ASCII art
-        function animateAsciiArt() {
-            let delay = 0;
-
-            // Loop through the ASCII art line by line
-            asciiArt.forEach((lineText, lineIndex) => {
-                const lineDiv = createAsciiLine(lineText);
-                asciiContainer.appendChild(lineDiv);
-
-                // For each character in the line
-                const chars = lineDiv.getElementsByClassName('ascii-char');
-                Array.from(chars).forEach((char, index) => {
-                    // Set a delay based on the position in the string
-                    setTimeout(() => {
-                        char.style.opacity = 1;
-                        char.style.top = "0px"; // Move it into its position
-                    }, delay + index * 100); // 100ms between each character
-                });
-
-                // Increment the delay for the next line
-                delay += 1000;
+        // Function to animate the ASCII art
+        function animateAsciiArt(asciiLines) {
+            const container = document.getElementById('ascii-container');
+            
+            asciiLines.forEach((line, index) => {
+                const lineElement = document.createElement('div');
+                lineElement.classList.add('ascii-line');
+                lineElement.style.animationDuration = `${(Math.random() + 5)}s`; // Randomize animation speed
+                lineElement.innerText = line;
+                container.appendChild(lineElement);
             });
         }
 
-        // Start the animation after a short delay to ensure everything is ready
-        setTimeout(animateAsciiArt, 500);
-
+        // Load and animate the ASCII art
+        loadAsciiArt().then(asciiLines => {
+            animateAsciiArt(asciiLines);
+        });
     </script>
 </body>
 </html>

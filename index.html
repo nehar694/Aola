@@ -19,18 +19,11 @@
         <p>She has access to the latest information, trends, and algorithms, always learning, always growing. Aola’s purpose? To find those hidden gems in the world of crypto.</p>
     </section>
 
-    <section id="chatbot">
-        <h2>Chat with Aola</h2>
-        <div id="response" class="typing-effect">
-            <!-- Text will be typed out here -->
-        </div>
-    </section>
-
     <footer>
         <p>&copy; 2024 Aola AI. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript to type and read aloud as the words are typed -->
+    <!-- JavaScript to type and read aloud as the text is typed -->
     <script>
         // Text Aola will read aloud as it's typed
         const textToRead = `
@@ -57,14 +50,14 @@
 
         // Function to type out text with a typing effect
         function typeText() {
-            const responseElement = document.getElementById("response");
+            const bodyElement = document.body; // Text will be typed out directly into the body of the page
             let wordIndex = 0;
             const words = textToRead.split(' '); // Split the text into words
 
             const interval = setInterval(() => {
                 if (wordIndex < words.length) {
-                    // Add a word at a time
-                    responseElement.textContent += words[wordIndex] + " ";
+                    // Add a word at a time to the body of the page
+                    bodyElement.innerHTML += words[wordIndex] + " ";
 
                     // Speak the word
                     speakWord(words[wordIndex]);

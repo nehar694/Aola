@@ -1,38 +1,29 @@
-* {
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: monospace, Courier, sans-serif;
-}
-
-body {
-    background-color: black;
-    color: white;
+    background-color: #000;
+    color: #0F0;
+    font-family: monospace;
     overflow: hidden;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
-.container {
+#ascii-container {
+    position: relative;
+    white-space: pre;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.ascii-line {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    white-space: pre;
-    font-size: 16px;
-    line-height: 18px;
-}
-
-.line {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: block;
-    opacity: 0;
-    animation: fall 2s forwards ease-in-out;
+    animation: fall 10s infinite;
 }
 
 @keyframes fall {
@@ -40,11 +31,12 @@ body {
         top: -100px;
         opacity: 0;
     }
-    50% {
-        opacity: 1;
-    }
     100% {
-        top: 0;
+        top: 100vh;
         opacity: 1;
     }
+}
+
+.line {
+    display: block;
 }

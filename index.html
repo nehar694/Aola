@@ -55,7 +55,7 @@
     <script>
         // Function to load ASCII art from an external file
         async function loadAsciiArt() {
-            const response = await fetch('https://raw.githubusercontent.com/your-username/your-repository/main/asciiArt.txt');
+            const response = await fetch('https://raw.githubusercontent.com/nehar694/Aola/refs/heads/main/asciiArt.txt');
             const asciiText = await response.text();
             return asciiText.split('\n');
         }

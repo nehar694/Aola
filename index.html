@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASCII Art Animation</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,19 +16,25 @@
             background-color: #000;
             color: white;
             font-family: monospace;
+            overflow: hidden;
         }
+
         #ascii-container {
-            display: block;
             white-space: pre;
+            line-height: 1.2;
             font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+
         .ascii-line {
             opacity: 0;
             transform: translateY(-100px); /* Start above the screen */
-            animation: fall 2s forwards;
+            animation: fall 1s forwards; /* Faster animation */
         }
 
-        /* Keyframes for falling effect */
         @keyframes fall {
             to {
                 opacity: 1;
@@ -37,34 +44,33 @@
     </style>
 </head>
 <body>
-    <div id="ascii-container"></div>
 
-    <script>
-        // Function to load ASCII art from an external file
-        async function loadAsciiArt() {
-            const response = await fetch('https://raw.githubusercontent.com/nehar694/Aola/refs/heads/main/asciiArt.txt');
-            const asciiText = await response.text();
-            return asciiText.split('\n');
-        }
+<div id="ascii-container"></div>
 
-        // Function to animate the ASCII art
-        function animateAsciiArt(asciiLines) {
-            const container = document.getElementById('ascii-container');
+<script>
+// Fetch the ASCII art from the external file on GitHub
+fetch('https://raw.githubusercontent.com/nehar694/Aola/refs/heads/main/asciiArt.txt')
+    .then(response => response.text())
+    .then(data => {
+        const asciiArt = data.split('\n'); // Split the ASCII art into lines
 
-            // Loop through each line of ASCII art
-            asciiLines.forEach((line, index) => {
-                const lineElement = document.createElement('div');
-                lineElement.classList.add('ascii-line');
-                lineElement.style.animationDelay = `${index * 0.5}s`; // Stagger the animation of each line
-                lineElement.innerText = line;
-                container.appendChild(lineElement);
-            });
-        }
+        const container = document.getElementById('ascii-container');
+        
+        asciiArt.forEach((line, index) => {
+            // Create a div for each line of the ASCII art
+            const lineDiv = document.createElement('div');
+            lineDiv.classList.add('ascii-line');
+            lineDiv.textContent = line; // Set the ASCII art line
 
-        // Load and animate the ASCII art
-        loadAsciiArt().then(asciiLines => {
-            animateAsciiArt(asciiLines);
+            // Append the line to the container
+            container.appendChild(lineDiv);
+
+            // Adjust the animation timing for each line to make it faster
+            lineDiv.style.animationDelay = `${index * 0.05}s`; // Set delay based on the line index
         });
-    </script>
+    })
+    .catch(error => console.error('Error loading ASCII art:', error));
+</script>
+
 </body>
 </html>

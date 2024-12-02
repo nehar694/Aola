@@ -60,7 +60,7 @@
                 } else {
                     clearInterval(interval);  // Stop typing when all words are done
                 }
-            }, 600);  // Typing speed (in ms for each word)
+            }, 500);  // Typing speed (in ms for each word)
         }
 
         // Function to speak each word with a female voice
@@ -79,8 +79,13 @@
 
         // Start typing the text and speaking when the page loads
         window.onload = () => {
-            loadVoices();  // Load the voices
-            setTimeout(typeText, 100);  // Start typing after a small delay to make sure everything is ready
+            loadVoices();  // Load the voices immediately
+            // Wait until the voices are fully loaded, then start typing
+            if (speechSynthesis.getVoices().length > 0) {
+                typeText();  // Start typing right away once voices are available
+            } else {
+                speechSynthesis.onvoiceschanged = typeText;  // If voices are not loaded yet, wait until they are
+            }
         };
     </script>
 </body>

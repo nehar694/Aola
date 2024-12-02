@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCII Art Pop-up</title>
+    <title>ASCII Art Animation</title>
     <style>
         body {
             margin: 0;
@@ -20,13 +20,36 @@
 
         #ascii-container {
             white-space: pre;
-            font-size: 16px;
+            font-size: 20px;  /* Increase font size */
             line-height: 1.2;
             text-align: center;
-            opacity: 0;  /* Initially hidden */
-            transition: opacity 2s ease-in-out;  /* Fade-in effect */
-            max-width: 80%;  /* Optional: Limit the width */
-            word-wrap: break-word;  /* Ensure long lines break correctly */
+            max-width: 90%;  /* Optional: Limit the width */
+            word-wrap: break-word;
+            opacity: 0;
+            overflow: hidden;  /* Ensure no overflow */
+            height: auto;
+            display: block;
+            animation: typewriter 6s steps(60) 1s 1 normal both, fadeIn 1s ease-in-out 7s forwards;
+        }
+
+        /* Typewriter animation */
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Fade-in effect after the typewriter */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -40,11 +63,6 @@
             .then(asciiArt => {
                 const asciiContainer = document.getElementById('ascii-container');
                 asciiContainer.textContent = asciiArt;
-
-                // Trigger the fade-in effect by changing the opacity
-                setTimeout(() => {
-                    asciiContainer.style.opacity = 1;
-                }, 100);  // Start the fade-in after a slight delay
             })
             .catch(err => console.error('Error loading ASCII art:', err));
     </script>

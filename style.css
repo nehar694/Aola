@@ -3,29 +3,8 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;  /* Full viewport height */
-    background-image: url('ascii-art (1).png');  /* Set your background image */
+    background-image: url('ascii-art.png');  /* Set your background image */
     background-size: cover;  /* Ensure the background covers the entire viewport */
     background-position: center center;  /* Center the background image */
     background-repeat: no-repeat;  /* Prevent tiling of the image */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;  /* Text color for visibility */
-    font-family: Arial, sans-serif;
-}
-
-/* Content to be displayed on top of the background */
-#content {
-    text-align: center;
-    color: white;
-}
-
-/* Optional: Add some text styling */
-h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
-}
-
-p {
-    font-size: 1.5em;
 }

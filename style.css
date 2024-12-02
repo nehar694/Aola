@@ -1,10 +1,108 @@
-/* Basic body setup */
-body {
+/* General Reset */
+* {
     margin: 0;
     padding: 0;
-    height: 100vh;  /* Full viewport height */
-    background-image: url('ascii-art.png');  /* Set your background image */
-    background-size: cover;  /* Ensure the background covers the entire viewport */
-    background-position: center center;  /* Center the background image */
-    background-repeat: no-repeat;  /* Prevent tiling of the image */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#chat-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+}
+
+#chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#messages {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.message {
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+}
+
+footer p {
+    font-size: 0.9em;
 }

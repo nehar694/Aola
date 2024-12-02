@@ -74,6 +74,9 @@
 
                 // Start speaking the word
                 speechSynthesis.speak(utterance);
+            } else {
+                // If female voice isn't loaded yet, retry after a short delay
+                setTimeout(() => speakWord(word), 100);
             }
         }
 
@@ -90,3 +93,4 @@
     </script>
 </body>
 </html>
+

@@ -23,19 +23,34 @@
             white-space: pre;
             font-size: 16px;
             line-height: 1.2;
+            text-align: center;  /* Center the ASCII art horizontally */
         }
 
         .ascii-line {
             opacity: 0;
             transform: translateY(-50px); /* Start slightly above */
             animation: fall 1s forwards;
-            display: block;
+            display: inline-block;  /* Ensure the characters align inline */
+        }
+
+        .ascii-character {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(-50px); /* Start slightly above */
+            animation: fall-character 1s forwards;
         }
 
         @keyframes fall {
             to {
                 opacity: 1;
                 transform: translateY(0); /* Move into position */
+            }
+        }
+
+        @keyframes fall-character {
+            to {
+                opacity: 1;
+                transform: translateY(0); /* Move into place */
             }
         }
     </style>
@@ -57,13 +72,23 @@ fetch('https://raw.githubusercontent.com/nehar694/Aola/refs/heads/main/asciiArt.
             // Create a div for each line of the ASCII art
             const lineDiv = document.createElement('div');
             lineDiv.classList.add('ascii-line');
-            lineDiv.textContent = line; // Set the ASCII art line
-
-            // Append the line to the container
             container.appendChild(lineDiv);
+            
+            // Split the line into individual characters
+            const characters = line.split('');
+            
+            // Add each character to the lineDiv
+            characters.forEach((char, charIndex) => {
+                const charDiv = document.createElement('span');
+                charDiv.classList.add('ascii-character');
+                charDiv.textContent = char;
 
-            // Adjust the animation delay to make each line fall sequentially
-            lineDiv.style.animationDelay = `${index * 0.05}s`; // Delay based on line index
+                // Append the character to the line div
+                lineDiv.appendChild(charDiv);
+
+                // Adjust the animation delay for each character (to stagger their fall)
+                charDiv.style.animationDelay = `${(index + charIndex * 0.1)}s`; // Delay based on line and character position
+            });
         });
     })
     .catch(error => console.error('Error loading ASCII art:', error));

@@ -13,36 +13,15 @@
             align-items: center;
             height: 100vh;
             background-color: #000;
-            color: white;
-            font-family: monospace;
             overflow: hidden;
         }
 
         #ascii-container {
-            white-space: pre;
-            font-size: 20px;  /* Increase font size */
-            line-height: 1.2;
             text-align: center;
-            max-width: 90%;  /* Optional: Limit the width */
-            word-wrap: break-word;
             opacity: 0;
-            overflow: hidden;  /* Ensure no overflow */
-            height: auto;
-            display: block;
-            animation: typewriter 6s steps(60) 1s 1 normal both, fadeIn 1s ease-in-out 7s forwards;
+            animation: fadeIn 2s ease-in-out forwards;
         }
 
-        /* Typewriter animation */
-        @keyframes typewriter {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-
-        /* Fade-in effect after the typewriter */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -51,20 +30,17 @@
                 opacity: 1;
             }
         }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
-    <div id="ascii-container"></div>
-
-    <script>
-        // Fetch the ASCII art from the GitHub file
-        fetch("https://raw.githubusercontent.com/nehar694/Aola/refs/heads/main/asciiArt.txt")
-            .then(response => response.text())
-            .then(asciiArt => {
-                const asciiContainer = document.getElementById('ascii-container');
-                asciiContainer.textContent = asciiArt;
-            })
-            .catch(err => console.error('Error loading ASCII art:', err));
-    </script>
+    <div id="ascii-container">
+        <!-- Replace the src path with the location of your image -->
+        <img src="ascii-art.png" alt="ASCII Art">
+    </div>
 </body>
 </html>

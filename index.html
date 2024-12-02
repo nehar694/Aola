@@ -29,49 +29,32 @@
       overflow: hidden;
     }
 
-    /* Matrix Background Animation */
-    @keyframes matrix {
-      0% {
-        transform: translateY(0);
-      }
-
-      100% {
-        transform: translateY(100%);
-      }
-    }
-
+    /* Matrix Background */
     .matrix-background {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: black;
-      color: #00FF00;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .matrix-column {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 30px;
+      color: cyan;
       font-family: 'Courier New', Courier, monospace;
       font-size: 24px;
       line-height: 30px;
-      white-space: nowrap;
-      animation: matrix 10s linear infinite;
-      z-index: -1;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .matrix-background span {
-      display: inline-block;
+      animation: fall 10s linear infinite;
       opacity: 0;
-      animation: drop 1s linear infinite;
     }
 
-    @keyframes drop {
-      0% {
-        opacity: 0;
-        transform: translateY(-100%);
-      }
-
-      100% {
-        opacity: 1;
+    @keyframes fall {
+      to {
         transform: translateY(100%);
       }
     }
@@ -172,9 +155,14 @@
 <body>
   <!-- Matrix Background -->
   <div class="matrix-background">
-    <!-- Add some matrix "falling" characters -->
-    <span>Aola 💥</span><span>🚀</span><span>PUMP IT</span><span>TO THE MOON</span>
-    <span>100X</span><span>🔴</span><span>FOMO</span><span>🚀</span><span>YOLO</span>
+    <!-- Create multiple matrix columns (falling characters) -->
+    <div class="matrix-column" style="left: 20%; animation-duration: 8s;"></div>
+    <div class="matrix-column" style="left: 30%; animation-duration: 12s;"></div>
+    <div class="matrix-column" style="left: 40%; animation-duration: 10s;"></div>
+    <div class="matrix-column" style="left: 50%; animation-duration: 14s;"></div>
+    <div class="matrix-column" style="left: 60%; animation-duration: 9s;"></div>
+    <div class="matrix-column" style="left: 70%; animation-duration: 11s;"></div>
+    <div class="matrix-column" style="left: 80%; animation-duration: 7s;"></div>
   </div>
 
   <!-- Main chat container -->
@@ -260,4 +248,24 @@
         // Get Aola's response
         const aolaResponse = getAolaResponse(userMessage);
 
-        // Display A
+        // Display Aola's response after a short delay
+        setTimeout(() => {
+          displayMessage(aolaResponse, 'aola');
+        }, 500);
+      }
+    }
+
+    // Event listener for the "Send" button
+    sendButton.addEventListener('click', handleUserMessage);
+
+    // Event listener for Enter key (pressing Enter also triggers sending the message)
+    userMessageInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        handleUserMessage();
+      }
+    });
+
+  </script>
+</body>
+
+</html>

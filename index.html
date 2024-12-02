@@ -21,24 +21,21 @@
 
         #ascii-container {
             white-space: pre;
-            line-height: 1.2;
             font-size: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            line-height: 1.2;
         }
 
         .ascii-line {
             opacity: 0;
-            transform: translateY(-100px); /* Start above the screen */
-            animation: fall 1s forwards; /* Faster animation */
+            transform: translateY(-50px); /* Start slightly above */
+            animation: fall 1s forwards;
+            display: block;
         }
 
         @keyframes fall {
             to {
                 opacity: 1;
-                transform: translateY(0); /* Moves to its final position */
+                transform: translateY(0); /* Move into position */
             }
         }
     </style>
@@ -49,7 +46,7 @@
 
 <script>
 // Fetch the ASCII art from the external file on GitHub
-fetch('https://raw.githubusercontent.com/nehar694/Aola/refs/heads/main/asciiArt.txt')
+fetch('https://raw.githubusercontent.com/your-username/your-repository/main/asciiArt.txt')
     .then(response => response.text())
     .then(data => {
         const asciiArt = data.split('\n'); // Split the ASCII art into lines
@@ -65,8 +62,8 @@ fetch('https://raw.githubusercontent.com/nehar694/Aola/refs/heads/main/asciiArt.
             // Append the line to the container
             container.appendChild(lineDiv);
 
-            // Adjust the animation timing for each line to make it faster
-            lineDiv.style.animationDelay = `${index * 0.05}s`; // Set delay based on the line index
+            // Adjust the animation delay to make each line fall sequentially
+            lineDiv.style.animationDelay = `${index * 0.05}s`; // Delay based on line index
         });
     })
     .catch(error => console.error('Error loading ASCII art:', error));

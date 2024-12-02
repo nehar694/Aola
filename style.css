@@ -5,14 +5,12 @@
     box-sizing: border-box;
 }
 
-/* Body and global styles */
 body {
     font-family: "Courier New", Courier, monospace;
     background-color: black;
     color: #00ff00; /* Green color like the Matrix */
     line-height: 1.6;
     padding: 20px;
-    position: relative;
 }
 
 /* Header styles */
@@ -24,13 +22,13 @@ header {
 h1 {
     font-size: 3em;
     margin-bottom: 10px;
-    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; /* Glowing green text */
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; /* Reduced glow */
 }
 
 h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; /* Subtle green glow for subheaders */
+    font-size: 2em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px #00ff00; /* Reduced glow */
 }
 
 .green {
@@ -44,56 +42,14 @@ section {
     margin-bottom: 30px;
     border: 1px solid #00ff00;
     border-radius: 8px;
-    box-shadow: 0 0 5px #00ff00; /* Subtle glow around sections */
+    box-shadow: 0 0 5px #00ff00; /* Reduced glow */
 }
 
-/* Chatbot section styles */
-#chatbot {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #1a1a1a; /* Dark background for the chatbot section */
-    border-radius: 8px;
-    box-shadow: 0 0 15px #00ff00; /* Green glow around the entire chatbot */
-    text-align: center;
-    max-width: 600px;
-    margin: 50px auto;
+/* Removed the matrix animation since the "breathing" effect is not needed */
+h1, h2, p {
+    /* No animation applied here */
 }
 
-/* Typing effect */
-#response {
-    margin-top: 20px;
-    font-size: 1.2em;
-    color: #00ff00;
-    background-color: #1a1a1a; /* Dark background for responses */
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 0 10px #00ff00; /* Green glow around the response */
-    white-space: pre-wrap; /* Preserve line breaks in responses */
-    text-align: left;
-}
-
-/* Animations for typing effect */
-@keyframes typing {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-
-.typing-effect {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid #00ff00; /* Green cursor effect */
-    animation: typing 3s steps(40) 1s forwards;
-}
-
-/* Footer styles */
 footer {
     text-align: center;
     padding: 10px;

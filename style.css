@@ -2,39 +2,30 @@
 body {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;  /* Full viewport height */
-    background-color: #000;  /* Black background */
-    overflow: hidden;  /* Prevent scrolling */
-}
-
-/* Container that holds the ASCII art image */
-#ascii-container {
-    text-align: center;
-    width: 100%;
-    height: 100%;
+    background-image: url('ascii-art (1).png');  /* Set your background image */
+    background-size: cover;  /* Ensure the background covers the entire viewport */
+    background-position: center center;  /* Center the background image */
+    background-repeat: no-repeat;  /* Prevent tiling of the image */
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    animation: fadeIn 2s ease-in-out forwards;
+    color: white;  /* Text color for visibility */
+    font-family: Arial, sans-serif;
 }
 
-/* Fade-in animation for the ASCII art */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+/* Content to be displayed on top of the background */
+#content {
+    text-align: center;
+    color: white;
 }
 
-/* Ensuring the image fits properly in the container */
-img {
-    max-width: 100%;  /* Ensure the image does not exceed the width of the viewport */
-    max-height: 100%; /* Ensure the image does not exceed the height of the viewport */
-    object-fit: contain;  /* Maintain the aspect ratio and ensure the full image is visible */
+/* Optional: Add some text styling */
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.5em;
 }

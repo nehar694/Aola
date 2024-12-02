@@ -73,7 +73,7 @@
                 } else {
                     clearInterval(interval);  // Stop typing when all words are done
                 }
-            }, 500);  // Typing speed (in ms for each word)
+            }, 600);  // Typing speed (in ms for each word)
         }
 
         // Function to speak each word with a female voice
@@ -81,8 +81,12 @@
             if (femaleVoice) {
                 const utterance = new SpeechSynthesisUtterance(word);
                 utterance.voice = femaleVoice;  // Set the voice to Aola's voice (female)
-                utterance.rate = 1;  // Speed of the speech
-                speechSynthesis.speak(utterance);  // Start speaking
+                utterance.rate = 1.2;  // Speed of the speech, set slightly faster than default
+                utterance.pitch = 1.2;  // Slightly higher pitch to make it more fluid and natural
+                utterance.volume = 1;  // Max volume
+
+                // Start speaking the word
+                speechSynthesis.speak(utterance);
             }
         }
 
@@ -94,4 +98,3 @@
     </script>
 </body>
 </html>
-

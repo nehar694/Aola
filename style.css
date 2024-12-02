@@ -1,8 +1,7 @@
 /* Global styles */
 body {
   font-family: 'Press Start 2P', cursive;
-  background: linear-gradient(135deg, rgba(0, 128, 128, 0.8), rgba(255, 255, 255, 0.5));
-  color: #fff;
+  background: #000;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -40,6 +39,7 @@ body {
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1; /* To keep it above the matrix background */
+  margin-top: 20vh; /* Adjust to make sure it's centered vertically */
 }
 
 /* Aola's Image */

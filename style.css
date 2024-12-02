@@ -5,8 +5,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;  /* Viewport height */
-    background-color: #000;
+    height: 100vh;  /* Full viewport height */
+    background-color: #000;  /* Black background */
     overflow: hidden;  /* Prevent scrolling */
 }
 
@@ -34,7 +34,7 @@ body {
 
 /* Ensuring the image fits properly in the container */
 img {
-    max-width: 100%;  /* Ensure the image is responsive and doesn't overflow horizontally */
-    max-height: 100vh;  /* Limit the image height to the viewport height */
-    object-fit: contain;  /* Maintain aspect ratio and ensure full image is visible */
+    max-width: 100%;  /* Ensure the image does not exceed the width of the viewport */
+    max-height: 100vh;  /* Ensure the image does not exceed the height of the viewport */
+    object-fit: contain;  /* Maintain the aspect ratio and ensure the full image is visible */
 }

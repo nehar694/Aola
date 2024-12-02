@@ -3,49 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Falling ASCII Art AI</title>
+    <title>ASCII Art Animation</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
     <style>
         body {
             margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #0F0;
-            font-family: monospace;
-            overflow: hidden;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: white;
+            font-family: monospace;
         }
-
         #ascii-container {
-            position: relative;
-            white-space: pre;
-            font-size: 20px;
-            line-height: 1.2;
-        }
-
-        .ascii-line {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: fall 10s infinite;
-        }
-
-        @keyframes fall {
-            0% {
-                top: -100px;
-                opacity: 0;
-            }
-            100% {
-                top: 100vh;
-                opacity: 1;
-            }
-        }
-
-        .line {
             display: block;
+            white-space: pre;
+            font-size: 16px;
+        }
+        .ascii-line {
+            opacity: 0;
+            transform: translateY(-100px); /* Start above the screen */
+            animation: fall 2s forwards;
+        }
+
+        /* Keyframes for falling effect */
+        @keyframes fall {
+            to {
+                opacity: 1;
+                transform: translateY(0); /* Moves to its final position */
+            }
         }
     </style>
 </head>
@@ -63,11 +50,12 @@
         // Function to animate the ASCII art
         function animateAsciiArt(asciiLines) {
             const container = document.getElementById('ascii-container');
-            
+
+            // Loop through each line of ASCII art
             asciiLines.forEach((line, index) => {
                 const lineElement = document.createElement('div');
                 lineElement.classList.add('ascii-line');
-                lineElement.style.animationDuration = `${(Math.random() + 5)}s`; // Randomize animation speed
+                lineElement.style.animationDelay = `${index * 0.5}s`; // Stagger the animation of each line
                 lineElement.innerText = line;
                 container.appendChild(lineElement);
             });

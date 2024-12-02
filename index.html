@@ -3,10 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCII Art Background</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS -->
+    <title>AI Nurse - Pump.fun Trenches</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- No content here, just the background image -->
+    <header>
+        <div class="header-content">
+            <img src="https://github.com/your-repository-path/Aola.png" alt="AI Nurse" class="profile-pic">
+            <h1>AI Nurse - Help in the Trenches</h1>
+            <p>Your personal AI nurse ready to assist the boys in the pump.fun trenches!</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="chat-container">
+            <div id="chat-box">
+                <div id="messages">
+                    <div class="message">Welcome to the trenches! Chat with others here.</div>
+                </div>
+                <input type="text" id="chat-input" placeholder="Type a message..." onkeyup="handleTyping(event)">
+                <button id="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Powered by AI Nurse</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

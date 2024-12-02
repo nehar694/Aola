@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Aola</title> <!-- Changed title here -->
+    <title>Aola</title> <!-- Title updated to just Aola -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Aola</h1> <!-- Changed header title here -->
+        <h1>Aola</h1> <!-- Title updated to Aola -->
         <p>In the trenches of <span class="green">pump.fun</span>, Aola finds the next 1000x.</p>
     </header>
 
@@ -80,9 +80,8 @@
         // Start typing the text and speaking when the page loads
         window.onload = () => {
             loadVoices();  // Load the voices
-            typeText();  // Start typing text and speaking
+            setTimeout(typeText, 100);  // Start typing after a small delay to make sure everything is ready
         };
     </script>
 </body>
 </html>
-

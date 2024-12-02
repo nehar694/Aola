@@ -5,134 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Falling ASCII Art</title>
     <style>
-        /* Basic styling for the page */
         body {
+            background-color: black;
+            color: white;
+            font-family: monospace;
             margin: 0;
-            padding: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1e1e1e;
-            font-family: monospace;
-            color: white;
             overflow: hidden;
         }
-
-        /* The container where the ASCII art will fall */
-        .ascii-art-container {
-            display: inline-block;
-            text-align: center;
+        .ascii-container {
             white-space: pre;
-            font-size: 18px;
-            position: relative;
-        }
-
-        /* Falling animation for each character */
-        .falling {
             position: absolute;
-            top: -200px;
-            opacity: 0;
-            animation: fall 2s forwards;
+            font-size: 12px;
+            line-height: 14px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
         }
-
-        /* Keyframes for the falling effect */
-        @keyframes fall {
-            0% {
-                top: -200px;
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                top: 0;
-                opacity: 1;
-            }
+        .ascii-line {
+            position: relative;
+            display: flex;
+        }
+        .ascii-char {
+            opacity: 0;
+            position: absolute;
+            top: -30px; /* Starting point above the screen */
+            transition: opacity 0.5s ease-out, top 1s ease-out;
         }
     </style>
 </head>
 <body>
-    <div class="ascii-art-container" id="ascii-art">
-        <!-- The ASCII art will be added here dynamically using JavaScript -->
+    <div class="ascii-container" id="asciiContainer">
+        <!-- The ASCII art characters will be added here -->
     </div>
 
     <script>
-        // Define your ASCII art here
+        // Define your ASCII art here as an array of strings
         const asciiArt = [
-"000000000                          4     9     51    1     9    000", 
-    "000000000  00 7 308   20 3030 960 4     9     7  00  0   070    000", 
-    "000000000  00 7 104 7 30 3010 660  5500510000  72 16 0 7 010    000", 
-    "000000000  00 7 104 1 30 3030 9402 3 0008493500  80  0   010    000", 
-    "000000000  00 7 305   30 3030 994       50176260000092   010    000", 
-    "000005310  88 7 305 7 30 3030 93  09099907006367759003   010    079", 
-    "000607550  80   305 7 30 3010 50 1072500   59990155600 7 010    017", 
-    "07110 950  88 7 105   30 3030 21 0000   70009350959400 7 010    037", 
-    "0 520 650  80 7 105 7 30 3010 00003   737      5938580   010    017", 
-    "01410 450  88 7 105 7 30 3030 67250       39 395038260   010    01", 
-    "075507630  98 7 105 7 30 1010  02017 007    0038818390   070    01", 
-    "07530 6300 00 7 105 7 30 1030 29 03447   6082 778202904  010    037", 
-    "07420 630 0  7   05 1 30 3010 90 76333609945500 9490400  070    017", 
-    "074207650  55  4 85 7 30 3030 90967209 0 5095 9396980007 070    017", 
-    "074507650  12800268   30 7020 9  9000584 3   60000060980 010    037", 
-    "014207650  03 590005  20 30 17 05   57 0924005 70009096 0570    021", 
-    "016507940  0  3 5 15  20 78593478    901 33   300240090 00 0    053", 
-    "016401950  058050 10  50 505 75790  4  94531004   5 0000 970    053", 
-    "039403940  0477  593  40 99380335  0      5291350413 040 9 0    043", 
-    "036603960  00 707 196 507    2 140  798802  0  9 337 05000 0    045", 
-    "039902990  00  997740 5050  351 9   1 72 3 05 355521 06690 0    062", 
-    "029602960  00   35330 402    077409    50  61384323  0696008    065", 
-    "059905890 70036360997700955  603360       077223331 640096000   064", 
-    "059905890 20029450 713   057  099330999980 552233393070044400927096", 
-    "049804880 300345508 3335 900  33  1109276 33   7137 87000445090 099", 
-    "098809090 3003555007 713 5 000000 73 500085353598060470608960 58099", 
-    "098009000600000000080   71 0059804 331    9999090536379090450870008", 
-    "098009000        7000007 660  27003 325546   6032365300760640031700", 
-    "0800000   7964653     0000500 77519  13124 700970700831700048007600", 
-    "090000979945211312545    9000721 7505 13  00807 0781279696090419000", 
-    "000000  233537231 333556    1  000000057900068001 900499 0819034000", 
-    "0000009 335971350  73332544    900042258896000100055199650 59524000", 
-    "0000000  139 11 309  133332546   7  0000009550535030069920809454000", 
-    "00000000 3553337  307 13333132542  7       43 505048859930404459000", 
-    "000000000 55333331 504 13333333354610    7 45809 290959920406456000", 
-    "0000000004 33323337120  333333333333284499 44 7543 0056620606559000", 
-    "00000000090 733233179203 333333317337 03133579001 57864920609426000", 
-    "000000000660  3355247  0 733333222312370117 1 3409 4504920609456000", 
-    "00000000093001 5531337 08 133333333333130988095273 3409000000890000", 
-    "000000000000000 453 31 0097333233333323  127 55751 3405999000000005", 
-    "7 33333 5800312233333333110 713159  600          12", 
-    "2    947729800753337 0800313223522322 016331265590     72317", 
-    "729922           73333 2998082332333223 0735222464900005", 
-    "7022569454999966592 321 009990923335323103255555350   3600893", 
-    "8332354631333335715 527 9460000009652199352325000990631325568889", 
-    "7091133125311331571 1 321  09586324000009400000049000000065444555", 
-    "530089455531    7400007353 82   04523339000  722 7      904699995", 
-    "0000800000000    0 5273777 35  364517790340008003333496311145", 
-    "31 590       80 0959809000009000000000    5533233133233"
-                                                                   
+            "000000000                          4     9     51    1     9    000",
+            "000000000  00 7 308   20 3030 960 4     9     7  00  0   070    000",
+            "000000000  00 7 104 7 30 3010 660  5500510000  72 16 0 7 010    000",
+            "000000000  00 7 104 1 30 3030 9402 3 0008493500  80  0   010    000",
+            "000000000  00 7 305   30 3030 994       50176260000092   010    000",
+            // Add your full ASCII art here
         ];
 
-        // Function to add ASCII art with falling animation
-        function addFallingArt() {
-            const container = document.getElementById("ascii-art");
+        // Get the container where we want to display the art
+        const asciiContainer = document.getElementById('asciiContainer');
 
-            // Loop through each line of ASCII art
-            asciiArt.forEach((line, index) => {
-                // Create a new div for each line
-                const lineDiv = document.createElement("div");
-                lineDiv.classList.add("falling");
-                lineDiv.style.animationDelay = `${index * 0.5}s`; // Stagger animation timing
+        // Function to create each line of the ASCII art
+        function createAsciiLine(lineText) {
+            const lineDiv = document.createElement('div');
+            lineDiv.classList.add('ascii-line');
+            for (let i = 0; i < lineText.length; i++) {
+                const charDiv = document.createElement('div');
+                charDiv.classList.add('ascii-char');
+                charDiv.innerText = lineText[i];
+                lineDiv.appendChild(charDiv);
+            }
+            return lineDiv;
+        }
 
-                // Add the line of ASCII art to the div
-                lineDiv.textContent = line;
+        // Function to animate the falling of the ASCII art
+        function animateAsciiArt() {
+            let delay = 0;
 
-                // Append the line to the container
-                container.appendChild(lineDiv);
+            // Loop through the ASCII art line by line
+            asciiArt.forEach((lineText, lineIndex) => {
+                const lineDiv = createAsciiLine(lineText);
+                asciiContainer.appendChild(lineDiv);
+
+                // For each character in the line
+                const chars = lineDiv.getElementsByClassName('ascii-char');
+                Array.from(chars).forEach((char, index) => {
+                    // Set a delay based on the position in the string
+                    setTimeout(() => {
+                        char.style.opacity = 1;
+                        char.style.top = "0px"; // Move it into its position
+                    }, delay + index * 100); // 100ms between each character
+                });
+
+                // Increment the delay for the next line
+                delay += 1000;
             });
         }
 
-        // Start adding the ASCII art when the page loads
-        window.onload = addFallingArt;
+        // Start the animation after a short delay to ensure everything is ready
+        setTimeout(animateAsciiArt, 500);
+
     </script>
 </body>
 </html>
